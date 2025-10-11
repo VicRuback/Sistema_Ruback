@@ -60,4 +60,29 @@ public class ControllerClientes  extends AbstractTableModel {
         return "";
     
     }
+     @Override
+    public String getColumnName(int columnIndex) {
+        if ( columnIndex == 0) {
+            return "Código";
+        } else if ( columnIndex == 1) {
+            return "Nome";         
+        } else if ( columnIndex == 2) {
+            return "Cpf";
+        } else if ( columnIndex == 3) {
+            return "Celular";
+        }  else if ( columnIndex == 3) {
+            return "Telefone";
+        }  else if ( columnIndex == 3) {
+            return "Email";
+        }  else if ( columnIndex == 3) {
+            return "Data nascimento";
+        }  else if ( columnIndex == 3) {
+            return "ativo";
+        }  else if ( columnIndex == 3) {
+            return "Data Cadastro";
+        }  else if ( columnIndex == 3) {
+            return "Sexo";
+        } 
+        return "";
+    }
 }

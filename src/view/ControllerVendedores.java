@@ -46,16 +46,37 @@ public class ControllerVendedores  extends AbstractTableModel {
             return varVendedores.getVarDataNascimento();
         } else if (columnIndex ==3) {
             return varVendedores.getVarEmail();
-        } else if (columnIndex ==3) {
+        } else if (columnIndex ==4) {
             return varVendedores.getVarApelido();
-        } else if (columnIndex ==3) {
+        } else if (columnIndex ==5) {
             return varVendedores.getVarCpf();
-        } else if (columnIndex ==3) {
+        } else if (columnIndex ==6) {
             return varVendedores.getVarTelefone();
-        } else if (columnIndex ==3) {
+        } else if (columnIndex ==7) {
             return varVendedores.getVarAtivo();
         }
         return "";
     
+    }
+     @Override
+    public String getColumnName(int columnIndex) {
+        if ( columnIndex == 0) {
+            return "Código";
+        } else if ( columnIndex == 1) {
+            return "Nome";         
+        } else if ( columnIndex == 2) {
+            return "Data nacimento";
+        } else if ( columnIndex == 3) {
+            return "Email";
+        }  else if ( columnIndex == 4) {
+            return "Apelido";
+        }  else if ( columnIndex == 5) {
+            return "Cpf";
+        }  else if ( columnIndex == 6) {
+            return "Telefone";
+        }  else if ( columnIndex == 7) {
+            return "Ativo";
+        }  
+        return "";
     }
 }
