@@ -4,16 +4,35 @@
  */
 
 package view;
+import bean.VarUsuarios;
+import dao.UsuariosDAO;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
 public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
+    
+    
+    private JDlgUsuario jDlgUsuario;
+    ControllerUsuario controllerUsuario;
+    
+ public void setTelaAnterior( JDlgUsuario jDlgUsuario) {;
+        this.jDlgUsuario = jDlgUsuario;
+        
+ }
 
     public JDlgUsuariosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        controllerUsuario = new ControllerUsuario();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = (List) usuariosDAO.listAll();
+       controllerUsuario.setList(lista);
+        jTable1.setModel(controllerUsuario);
     }
 
     
@@ -29,10 +48,10 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jBtnOK = new javax.swing.JButton();
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -43,7 +62,7 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable1);
 
         jBtnOK.setText("ok");
         jBtnOK.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +97,9 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         // TODO add your handling code here:
-       setVisible(false);
+       VarUsuarios varUsuarios =  controllerUsuario.getBean( jTable1.getSelectedRow() );
+        jDlgUsuario.beanView(varUsuarios);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**
@@ -127,7 +148,7 @@ public class JDlgUsuariosPesquisar extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnOK;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 }

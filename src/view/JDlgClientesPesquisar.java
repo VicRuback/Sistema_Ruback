@@ -3,16 +3,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import bean.VarClientes;
+import dao.ClientesDAO;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
 public class JDlgClientesPesquisar extends javax.swing.JDialog {
-
+    
+    
+    
+    private JDlgClientes jDlgClientes;
+    ControllerClientes controllerClientes;
+    
+ public void setTelaAnterior( JDlgClientes jDlgClientes) {;
+        this.jDlgClientes = jDlgClientes;
+    }
     public JDlgClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        controllerClientes = new ControllerClientes();
+        ClientesDAO clientesDAO = new ClientesDAO();
+        List lista = (List) clientesDAO.listAll();
+       controllerClientes.setList(lista);
+        jTable1.setModel(controllerClientes);
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,7 +94,9 @@ public class JDlgClientesPesquisar extends javax.swing.JDialog {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+        VarClientes varClientes =  controllerClientes.getBean( jTable1.getSelectedRow() );
+        jDlgClientes.beanView(varClientes);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**

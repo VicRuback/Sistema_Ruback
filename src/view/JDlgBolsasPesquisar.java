@@ -6,26 +6,29 @@ package view;
 
 import bean.VarBolsas;
 import dao.BolsasDAO;
-import java.awt.Component;
 import java.util.List;
-import view.JDlgBolsasPesquisar;
+
+
 
 /**
  *
  * @author Marcos
  */
 public class JDlgBolsasPesquisar extends javax.swing.JDialog {
-   private Component setTelaAnterior;
-
-public void setTelaAnterior(Component setTelaAnterior) {
-    this.setTelaAnterior = setTelaAnterior;
-}
+ 
 
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
     private JDlgBolsas jDlgBolsas;
     ControllerBolsas controllerBolsas;
+    
+     public void setTelaAnterior( JDlgBolsas jDlgBolsas) {;
+        this.jDlgBolsas = jDlgBolsas;
+    }
+    
+    
+   
     
     public JDlgBolsasPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -37,6 +40,7 @@ public void setTelaAnterior(Component setTelaAnterior) {
         List lista = (List) bolsasDAO.listAll();
        controllerBolsas.setList(lista);
         jTable1.setModel(controllerBolsas);
+        
     }
 
 //    public void setTelaAnterior( JDlgUsuarios jDlgUsuarios) {
@@ -106,9 +110,10 @@ public void setTelaAnterior(Component setTelaAnterior) {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        VarBolsas varBolsas =  controllerBolsas.getBean( jTable1.getSelectedRow() );
+         VarBolsas varBolsas =  controllerBolsas.getBean( jTable1.getSelectedRow() );
         jDlgBolsas.beanView(varBolsas);
         this.setVisible(false);
+     
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**

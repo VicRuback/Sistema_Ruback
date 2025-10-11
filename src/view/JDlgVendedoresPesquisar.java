@@ -3,16 +3,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import bean.VarVendedores;
+import dao.VendedoresDAO;
+import java.util.List;
 
 /**
  *
  * @author admin
  */
 public class JDlgVendedoresPesquisar extends javax.swing.JDialog {
+    
+       private JDlgVendedores jDlgVendedores;
+    ControllerVendedores controllerVendedores;
+    
+ public void setTelaAnterior( JDlgVendedores jDlgVendedores) {;
+        this.jDlgVendedores = jDlgVendedores;
+        
+ }
 
     public JDlgVendedoresPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        controllerVendedores = new ControllerVendedores();
+        VendedoresDAO usuariosDAO = new VendedoresDAO();
+        List lista = (List) usuariosDAO.listAll();
+       controllerVendedores.setList(lista);
+        jTable1.setModel(controllerVendedores);
     }
 
     
@@ -80,7 +98,9 @@ public class JDlgVendedoresPesquisar extends javax.swing.JDialog {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
+          VarVendedores varVendedores =  controllerVendedores.getBean( jTable1.getSelectedRow() );
+        jDlgVendedores.beanView(varVendedores);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**

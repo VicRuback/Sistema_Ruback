@@ -8,34 +8,30 @@ import bean.VarBolsas;
 import dao.BolsasDAO;
 import tools.Util;
 
+
 /**
  *
  * @author admin
  */
 public class JDlgBolsas extends javax.swing.JDialog {
+    private boolean incluir;
  
-   /**
-     * Creates new form jDlgClientes
-     * @param parent
-     * @param modal
-     */
+ 
    public JDlgBolsas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Cadastro de Bolsas");
+        setLocationRelativeTo(null);
         
-        
-
-        // Desabilita campos e botões de confirmar/cancelar
+       
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
                 jTxtColoracao, jCboColecao, jTxtColoracao,
                 jBtnConfirmar, jBtnCancelar);
     }
+   
     public VarBolsas viewBean(){
     VarBolsas varBolsas = new VarBolsas();
-    
-    
     int codigo = Util.strToInt(jTxtCodigo.getText());
     varBolsas.setVarIdBolsas(codigo);
     varBolsas.setVarNome(jTxtNome.getText());
@@ -47,8 +43,7 @@ public class JDlgBolsas extends javax.swing.JDialog {
     String colecao = jCboColecao.getSelectedItem().toString();
     varBolsas.setVarColecao(colecao);
     if (jChbAtivo.isSelected()== true){
-            varBolsas.setVarAtivo("S")
-                    ;
+            varBolsas.setVarAtivo("S");
         } else {
             varBolsas.setVarAtivo("N");
         }
@@ -376,17 +371,18 @@ public class JDlgBolsas extends javax.swing.JDialog {
         Util.habilitar(false, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.Limpar(jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
                 jTxtColoracao, jCboColecao, jChbAtivo);
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluiActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-      if (Util.perguntar("Deseja excluir o registro?")) {
-    BolsasDAO bolsasDAO = new BolsasDAO();
-    bolsasDAO.delete(viewBean());
-    Util.mensagem("Registro excluído com sucesso!");
-} else {
-    Util.mensagem("Exclusão cancelada.");
-}
+      if (Util.perguntar("Deseja Excluir?") == true) {
+            BolsasDAO bolsasDAO = new BolsasDAO();
+            bolsasDAO.delete(viewBean());
+
+        }
+      
         
        Util.Limpar(jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
                 jTxtColoracao, jCboColecao, jChbAtivo);
@@ -396,15 +392,22 @@ public class JDlgBolsas extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
+         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
                 jTxtColoracao, jCboColecao, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.habilitar(false, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        jTxtNome.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Util.mensagem("Registro confirmado!");
+        BolsasDAO bolsasDAO = new BolsasDAO();
+        if (incluir == true){
+         bolsasDAO.insert(viewBean());
+        }else {
+        bolsasDAO.update(viewBean());
+        }
     Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtPreco, jTxtDescricao, jTxtCategoria,
                 jTxtColoracao, jCboColecao, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
@@ -423,10 +426,9 @@ public class JDlgBolsas extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-
-         JDlgBolsasPesquisar jDlgBolsasPesquisar = new JDlgBolsasPesquisar(null, true);
-       jDlgBolsasPesquisar.setVisible(true);
-       jDlgBolsasPesquisar.setTelaAnterior(this);
+        JDlgBolsasPesquisar jDlgBolsasPesquisar = new JDlgBolsasPesquisar(null, true);     
+        jDlgBolsasPesquisar.setTelaAnterior(this);
+        jDlgBolsasPesquisar.setVisible(true);
          
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 

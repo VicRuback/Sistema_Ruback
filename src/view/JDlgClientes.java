@@ -5,9 +5,7 @@
 package view;
 
 import bean.VarClientes;
-import java.text.ParseException;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import dao.ClientesDAO;
 import tools.Util;
 
 /**
@@ -15,49 +13,23 @@ import tools.Util;
  * @author admin
  */
 public class JDlgClientes extends javax.swing.JDialog {
-    private MaskFormatter mascaraCPF;
-    private MaskFormatter mascaraDataNascimento;
-    
-    
-
-
-    /**
-     * Creates new form jDlgClientes
-     * @param parent
-     * @param modal
-     * 
-     * 
-     */
+    private boolean incluir;
+   
     public JDlgClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro do cliente");
         setLocationRelativeTo(null);
         
-    try {
-        
-        mascaraCPF = new MaskFormatter("###.###.###-##");
-        mascaraCPF.setPlaceholderCharacter('_');
-
-        mascaraDataNascimento = new MaskFormatter("##/##/####");
-        mascaraDataNascimento.setPlaceholderCharacter('_');
-
-    } catch (ParseException ex) {
-        ex.printStackTrace();
-    }
-
     
-    jTxtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
-    jFmtData_nascimento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
-        Util.habilitar(true,jTxtCodigo, jTxtNome, 
-                jTxtCpf, jFmtData_nascimento,jChbAtivo,
+        Util.habilitar(false,jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, jChoSexo,
                 jBtnConfirmar, jBtnCancelar);
         
 
     }
     public VarClientes viewBean() {
     VarClientes varClientes = new VarClientes();
-
     varClientes.setVarIdCliente(Util.strToInt(jTxtCodigo.getText()));
     varClientes.setVarNome(jTxtNome.getText());
     varClientes.setVarCpf(jTxtCpf.getText());
@@ -68,8 +40,7 @@ public class JDlgClientes extends javax.swing.JDialog {
     varClientes.setVarSexo(jChoSexo.getSelectedItem().toString());
     varClientes.setVarEmail(jTxtEmail.getText());
     if (jChbAtivo.isSelected()== true){
-            varClientes.setVarAtivo("S")
-                    ;
+            varClientes.setVarAtivo("S");
         } else {
             varClientes.setVarAtivo("N");
         }
@@ -119,7 +90,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         jFmtData_cadastro = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
-        jChoSexo = new javax.swing.JComboBox<>();
+        jChoSexo = new javax.swing.JComboBox<String>();
         jLabel10 = new javax.swing.JLabel();
         jTxtEmail = new javax.swing.JTextField();
         jChbAtivo = new javax.swing.JCheckBox();
@@ -164,6 +135,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFmtData_nascimento.setText("");
         jFmtData_nascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFmtData_nascimentoActionPerformed(evt);
@@ -180,7 +152,7 @@ public class JDlgClientes extends javax.swing.JDialog {
 
         jLabel9.setText("Sexo");
 
-        jChoSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino", "Outro" }));
+        jChoSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino", "Outro" }));
         jChoSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jChoSexoActionPerformed(evt);
@@ -393,47 +365,64 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, jChoSexo,
+                jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento, jChbAtivo);
+        Util.Limpar(jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, jChoSexo);
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-       Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
+       Util.habilitar(true, jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, jChoSexo,
+                jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        jTxtNome.grabFocus();
+        incluir = false;
     
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-         if (Util.perguntar("Deseja excluir o registro?")) {
-  
-       System.out.println("Registro excluído!");
-       } else {
-       System.out.println("Exclusão cancelada.");
-       }
-        Util.habilitar(true, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        if (Util.perguntar("Deseja Excluir?") == true) {
+            ClientesDAO clientesDAO = new ClientesDAO();
+            clientesDAO.delete(viewBean());
+
+        }
+       Util.Limpar(jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, jChoSexo);
+        
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
+         ClientesDAO clientesDAO = new ClientesDAO();
+        if (incluir == true){
+         clientesDAO.insert(viewBean());
+        }else {
+        clientesDAO.update(viewBean());
+        }
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, jChbAtivo, 
+                jChoSexo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento, jChbAtivo);
+        
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-       Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento,
-                jChbAtivo, jBtnConfirmar, jBtnCancelar);
+       Util.habilitar(false, jTxtCodigo, jTxtNome, jFmtCpf, jTxtCelular, jTxtTelefone,
+                jTxtEmail, jFmtData_nascimento,jFmtData_cadastro, 
+                jChbAtivo, jChoSexo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jFmtData_nascimento, jChbAtivo);
+       
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        Util.mensagem("Não implementado");
+       JDlgClientesPesquisar jDlgClientesPesquisar = new JDlgClientesPesquisar(null, true);     
+        jDlgClientesPesquisar.setTelaAnterior(this);
+        jDlgClientesPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jTxtCelularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCelularActionPerformed

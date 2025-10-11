@@ -2,28 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/VendasDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/BolsasDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgVendedores.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/bean/VarBolsas.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgUsuariosPesquisar.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/UsuariosDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/VendedoresDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgBolsasPesquisar.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgVendedoresPesquisar.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/ClientesDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgClientes.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/tools/Util.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/dao/AbstractDAO.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgUsuario.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgBolsas.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/ControllerBolsas.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/bean/VarClientes.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgClientesPesquisar.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JDlgLogin.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/bean/VarUsuarios.java</file>
-            <file>file:/C:/Users/vicru/OneDrive/Documentos/Sistema_Ruback/Sistema_Ruback/src/view/JframePrincipal.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

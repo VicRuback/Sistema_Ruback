@@ -6,6 +6,7 @@ package view;
 
 import bean.VarVendedores;
 import tools.Util;
+import dao.VendedoresDAO;
 
 
 /**
@@ -13,21 +14,16 @@ import tools.Util;
  * @author admin
  */
 public class JDlgVendedores extends javax.swing.JDialog {
-
-    /**
-     * Creates new form jDlgVendedores
-     * @param parent
-     * @param modal
-     */
+     private boolean incluir;
+     
      public JDlgVendedores(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Cadastro de Vendedores");
 
-        // Desabilita os campos e botões de confirmação/cancelamento no início
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento,
-            jTxtTelefone, jLabelAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo, jBtnConfirmar, jBtnCancelar);
     
     }
       public VarVendedores viewBean() {
@@ -37,7 +33,7 @@ public class JDlgVendedores extends javax.swing.JDialog {
     varVendedores.setVarEmail(jTxtEmail.getText());
     varVendedores.setVarNome(jTxtNome.getText());
     varVendedores.setVarApelido(jTxtApelido.getText());
-    varVendedores.setVarDataNascimento(Util.strDate(jFmtDataNascimento.getText()));
+    varVendedores.setVarDataNascimento(Util.strDate(jTxtData_nascimento.getText()));
     varVendedores.setVarCpf(jTxtCpf.getText()); 
     varVendedores.setVarTelefone(jTxtTelefone.getText());
     
@@ -56,7 +52,7 @@ public class JDlgVendedores extends javax.swing.JDialog {
     jTxtEmail.setText(varVendedores.getVarEmail());
     jTxtNome.setText(varVendedores.getVarNome());
     jTxtApelido.setText(varVendedores.getVarApelido());
-    jFmtDataNascimento.setText(Util.dateToStr(varVendedores.getVarDataNascimento()));
+    jTxtData_nascimento.setText(Util.dateToStr(varVendedores.getVarDataNascimento()));
     jTxtCpf.setText(varVendedores.getVarCpf());
     jTxtTelefone.setText(varVendedores.getVarTelefone());
      if (varVendedores.getVarAtivo().equals("S")== true){
@@ -325,7 +321,9 @@ public class JDlgVendedores extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        Util.mensagem("Não implementado");
+        JDlgVendedoresPesquisar jDlgVendedoresPesquisar = new JDlgVendedoresPesquisar(null, true);     
+        jDlgVendedoresPesquisar.setTelaAnterior(this);
+        jDlgVendedoresPesquisar.setVisible(true);
        
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
@@ -343,10 +341,13 @@ public class JDlgVendedores extends javax.swing.JDialog {
 
     private void jBtnIncluiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluiActionPerformed
         // TODO add your handling code here:
-         Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento,
-            jTxtTelefone, jLabelAtivo, jBtnConfirmar, jBtnCancelar);
+         Util.habilitar(true,jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        
+        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo);
+        jTxtCodigo.grabFocus();
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluiActionPerformed
 
     private void jTxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtEmailActionPerformed
@@ -355,22 +356,23 @@ public class JDlgVendedores extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-         if (Util.perguntar("Deseja excluir o registro?")) {
-  
-       System.out.println("Registro excluído!");
-       } else {
-       System.out.println("Exclusão cancelada.");
-       }
-        Util.habilitar(true, jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         if (Util.perguntar("Deseja Excluir?") == true) {
+            VendedoresDAO vendedoresDAO = new VendedoresDAO();
+            vendedoresDAO.delete(viewBean());
+
+        }
+        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo);
        
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento,
-            jTxtTelefone, jLabelAtivo, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        jTxtNome.grabFocus();
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jTxtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCpfActionPerformed
@@ -379,20 +381,26 @@ public class JDlgVendedores extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento,
-            jTxtTelefone, jLabelAtivo, jBtnConfirmar, jBtnCancelar);
+         VendedoresDAO vendedoresDAO = new VendedoresDAO();
+        if (incluir == true){
+         vendedoresDAO.insert(viewBean());
+        }else {
+        vendedoresDAO.update(viewBean());
+        }
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento, jTxtTelefone, jLabelAtivo);
+        
         
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-          Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento,
-            jTxtTelefone, jLabelAtivo, jBtnConfirmar, jBtnCancelar);
+          Util.habilitar(false,jTxtCodigo, jTxtNome, jTxtCpf, jTxtData_nascimento, jTxtEmail, jTxtApelido,
+            jTxtTelefone, jChbAtivo, jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnInclui, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.Limpar(jTxtCodigo, jTxtNome, jTxtCpf, jFmtDataNascimento, jTxtTelefone, jLabelAtivo);
+     
         
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
