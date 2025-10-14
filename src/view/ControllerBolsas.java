@@ -58,4 +58,25 @@ public class ControllerBolsas  extends AbstractTableModel {
         return "";
     
     }
+    @Override
+    public String getColumnName(int columnIndex) {
+        if ( columnIndex == 0) {
+            return "Código";
+        } else if ( columnIndex == 1) {
+            return "Nome";         
+        } else if ( columnIndex == 2) {
+            return "categoria";
+        } else if ( columnIndex == 3) {
+            return "colecao";
+        }  else if ( columnIndex == 3) {
+            return "descricao";
+        }  else if ( columnIndex == 3) {
+            return "coloracao";
+        }  else if ( columnIndex == 3) {
+            return "preco";
+        }  else if ( columnIndex == 3) {
+            return "ativo";
+        } 
+        return "";
+    }
 }
