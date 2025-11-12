@@ -4,13 +4,9 @@ package bean;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,7 +36,7 @@ public class VarClientes  implements java.io.Serializable {
      private Date varDataUltimaCompra;
      private BigDecimal varLimiteCredito;
      private String varEstadocivil;
-     private Set varVendases = new HashSet(0);
+     
 
     public VarClientes() {
     }
@@ -49,7 +45,7 @@ public class VarClientes  implements java.io.Serializable {
     public VarClientes(int varIdCliente) {
         this.varIdCliente = varIdCliente;
     }
-    public VarClientes(int varIdCliente, String varNome, String varCpf, String varRg, String varSexo, Date varDataNascimento, String varEmail, String varEndereco, String varTelefone, String varCelular, Date varDataCadastro, String varAtivo, Date varDataUltimaCompra, BigDecimal varLimiteCredito, String varEstadocivil, Set varVendases) {
+    public VarClientes(int varIdCliente, String varNome, String varCpf, String varRg, String varSexo, Date varDataNascimento, String varEmail, String varEndereco, String varTelefone, String varCelular, Date varDataCadastro, String varAtivo, Date varDataUltimaCompra, BigDecimal varLimiteCredito, String varEstadocivil) {
        this.varIdCliente = varIdCliente;
        this.varNome = varNome;
        this.varCpf = varCpf;
@@ -65,7 +61,7 @@ public class VarClientes  implements java.io.Serializable {
        this.varDataUltimaCompra = varDataUltimaCompra;
        this.varLimiteCredito = varLimiteCredito;
        this.varEstadocivil = varEstadocivil;
-       this.varVendases = varVendases;
+      
     }
    
      @Id 
@@ -220,14 +216,6 @@ public class VarClientes  implements java.io.Serializable {
         this.varEstadocivil = varEstadocivil;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="varClientes")
-    public Set getVarVendases() {
-        return this.varVendases;
-    }
-    
-    public void setVarVendases(Set varVendases) {
-        this.varVendases = varVendases;
-    }
 
 
 

@@ -2,13 +2,9 @@ package bean;
 // Generated 26/09/2025 08:58:21 by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -30,7 +26,7 @@ public class VarBolsas  implements java.io.Serializable {
      private String varAtivo;
      private String varColecao;
      private String varTipo;
-     private Set varVendasBolsases = new HashSet(0);
+   
 
     public VarBolsas() {
     }
@@ -39,7 +35,7 @@ public class VarBolsas  implements java.io.Serializable {
     public VarBolsas(int varIdBolsas) {
         this.varIdBolsas = varIdBolsas;
     }
-    public VarBolsas(int varIdBolsas, String varNome, String varCategoria, String varColoracao, String varDescricao, Double varPreco, String varAtivo, String varColecao, String varTipo, Set varVendasBolsases) {
+    public VarBolsas(int varIdBolsas, String varNome, String varCategoria, String varColoracao, String varDescricao, Double varPreco, String varAtivo, String varColecao, String varTipo) {
        this.varIdBolsas = varIdBolsas;
        this.varNome = varNome;
        this.varCategoria = varCategoria;
@@ -49,7 +45,7 @@ public class VarBolsas  implements java.io.Serializable {
        this.varAtivo = varAtivo;
        this.varColecao = varColecao;
        this.varTipo = varTipo;
-       this.varVendasBolsases = varVendasBolsases;
+      
     }
    
      @Id 
@@ -142,15 +138,6 @@ public class VarBolsas  implements java.io.Serializable {
     
     public void setVarTipo(String varTipo) {
         this.varTipo = varTipo;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="varBolsas")
-    public Set getVarVendasBolsases() {
-        return this.varVendasBolsases;
-    }
-    
-    public void setVarVendasBolsases(Set varVendasBolsases) {
-        this.varVendasBolsases = varVendasBolsases;
     }
 
 

@@ -27,7 +27,7 @@ public class Util {
                 ((JTextField) componentes[i]).setText("");
             }
             if (componentes[i] instanceof JComboBox) {
-                ((JTextField) componentes[i]).setText("");
+                ((JComboBox) componentes[i]).setSelectedIndex(-1);
             }
 
         }
