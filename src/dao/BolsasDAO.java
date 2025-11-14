@@ -61,6 +61,10 @@ public class BolsasDAO extends AbstractDAO{
         session.getTransaction(). commit();
         return lista;
     }
+      public static void main(String[] args) {
+        BolsasDAO bolsasDAO = new BolsasDAO();
+        bolsasDAO.listAll();
+    }
     
     
 }

@@ -140,7 +140,7 @@ public class VarBolsas  implements java.io.Serializable {
         this.varTipo = varTipo;
     }
 
-
+    
 
 
 }

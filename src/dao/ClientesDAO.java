@@ -61,7 +61,10 @@ public class ClientesDAO extends AbstractDAO{
         session.getTransaction(). commit();
         return lista;
     }
-   
+    public static void main(String[] args) {
+        ClientesDAO clientesDAO = new ClientesDAO();
+        clientesDAO.listAll();
+    }
     
 }
 

@@ -61,6 +61,11 @@ public class VendedoresDAO extends AbstractDAO{
         session.getTransaction(). commit();
         return lista;
     }
+    
+     public static void main(String[] args) {
+        VendasDAO vendasDAO = new VendasDAO();
+        vendasDAO.listAll();
+    }
    
     
 }

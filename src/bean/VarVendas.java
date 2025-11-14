@@ -1,18 +1,16 @@
+
 package bean;
 // Generated 26/09/2025 08:58:21 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,8 +29,8 @@ public class VarVendas  implements java.io.Serializable {
      private VarClientes varClientes;
      private VarUsuarios varUsuarios;
      private Date varDataVendas;
-     private BigDecimal varTotal;
-     private Set varVendasBolsases = new HashSet(0);
+     private double varTotal;
+    
 
     public VarVendas() {
     }
@@ -41,13 +39,13 @@ public class VarVendas  implements java.io.Serializable {
     public VarVendas(int varIdVendas) {
         this.varIdVendas = varIdVendas;
     }
-    public VarVendas(int varIdVendas, VarClientes varClientes, VarUsuarios varUsuarios, Date varDataVendas, BigDecimal varTotal, Set varVendasBolsases) {
+    public VarVendas(int varIdVendas, VarClientes varClientes, VarUsuarios varUsuarios, Date varDataVendas, double varTotal) {
        this.varIdVendas = varIdVendas;
        this.varClientes = varClientes;
        this.varUsuarios = varUsuarios;
        this.varDataVendas = varDataVendas;
        this.varTotal = varTotal;
-       this.varVendasBolsases = varVendasBolsases;
+       
     }
    
      @Id 
@@ -94,21 +92,12 @@ public class VarVendas  implements java.io.Serializable {
 
     
     @Column(name="var_total", precision=10)
-    public BigDecimal getVarTotal() {
+    public double getVarTotal() {
         return this.varTotal;
     }
     
-    public void setVarTotal(BigDecimal varTotal) {
+    public void setVarTotal(double varTotal) {
         this.varTotal = varTotal;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="varVendas")
-    public Set getVarVendasBolsases() {
-        return this.varVendasBolsases;
-    }
-    
-    public void setVarVendasBolsases(Set varVendasBolsases) {
-        this.varVendasBolsases = varVendasBolsases;
     }
 
 
