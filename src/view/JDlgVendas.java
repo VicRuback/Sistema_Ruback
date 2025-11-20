@@ -11,6 +11,7 @@ import bean.VarVendas;
 import dao.ClientesDAO;
 import dao.VendasDAO;
 import dao.VendedoresDAO;
+import java.util.ArrayList;
 import java.util.List;
 import tools.Util;
 
@@ -19,7 +20,10 @@ import tools.Util;
  * @author vicru
  */
 public class JDlgVendas extends javax.swing.JDialog {
+    ControllerVendasProdutos controllerVendasProdutos;
+
          private boolean incluir;
+         
     /**
      * Creates new form JDlgVendas
      */
@@ -27,12 +31,9 @@ public class JDlgVendas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-         setTitle("Cadastro de Bolsas");
-        setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboUsuarios, jTxtTotal,
                 jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-
         ClientesDAO clientesDAO = new ClientesDAO();
         List lista = (List) clientesDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
@@ -43,6 +44,10 @@ public class JDlgVendas extends javax.swing.JDialog {
         for (Object object : listaV) {
             jCboUsuarios.addItem((VarUsuarios) object);
         }
+        
+         controllerVendasProdutos = new ControllerVendasProdutos();
+        controllerVendasProdutos.setList(new ArrayList());
+        jTable1.setModel(controllerVendasProdutos);
     }
 
     public VarVendas viewBean() {
@@ -313,7 +318,8 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir o produto ?") == true) {
-
+            int ind = jTable1.getSelectedRow();
+            controllerVendasProdutos.removeBean(ind);
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -375,6 +381,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
          JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+         jDlgVendasProdutos.setTelaAnterior(this);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 

@@ -73,10 +73,20 @@ public class JDlgVendasPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ok.png"))); // NOI18N
         jBtnOk.setText("OK");
+        jBtnOk.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBtnOkMouseClicked(evt);
+            }
+        });
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnOkActionPerformed(evt);
@@ -116,6 +126,16 @@ public class JDlgVendasPesquisar extends javax.swing.JDialog {
         this.setVisible(false);
      
     }//GEN-LAST:event_jBtnOkActionPerformed
+
+    private void jBtnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnOkMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnOkMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2){
+        jBtnOkActionPerformed(null);}
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

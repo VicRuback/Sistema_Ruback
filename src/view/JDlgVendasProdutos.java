@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package view;
+
+import bean.VarVendasBolsas;
 import bean.VarBolsas;
 import dao.BolsasDAO;
 import java.util.List;
@@ -14,7 +16,7 @@ import tools.Util;
  * @author u1845853
  */
 public class JDlgVendasProdutos extends javax.swing.JDialog {
-
+        JDlgVendas jDlgVendas;
     /**
      * Creates new form JDlgPedidosProdutos
      */
@@ -22,13 +24,18 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Vendas produtos");
         Util.habilitar(false, jTxtValorUnitario, jTxtTotal);
         jTxtQuantidade.setText("1");
          BolsasDAO bolsasDAO = new BolsasDAO();
         List lista = (List) bolsasDAO.listAll();
-        for (int i = 0; i < lista.size(); i++) {
-            jCboProdutos.addItem((VarBolsas) lista.get(i));
+         for (Object object : lista){
+        jCboProdutos.addItem((VarBolsas) object);
         }
+    }
+    
+     public void setTelaAnterior(JDlgVendas jDlgVendas){
+    this.jDlgVendas = jDlgVendas;
     }
 
     /**
@@ -62,6 +69,17 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         });
 
         jLabel2.setText("Quantidade");
+
+        jTxtQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtQuantidadeActionPerformed(evt);
+            }
+        });
+        jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtQuantidadeKeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("Valor Unitário");
 
@@ -147,6 +165,12 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+         VarVendasBolsas varVendasBolsas = new VarVendasBolsas();
+        //pedidosProdutos.setPedidos();
+        varVendasBolsas.setVarBolsas((VarBolsas) jCboProdutos.getSelectedItem());
+        varVendasBolsas.setVarQuantidade(Util.strToInt(jTxtQuantidade.getText()));
+        varVendasBolsas.setVarValorUnitario(Util.strToDouble(jTxtValorUnitario.getText()));
+        jDlgVendas.controllerVendasProdutos.addBean(varVendasBolsas);
         setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -162,6 +186,22 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         int quant = Util.strToInt(jTxtQuantidade.getText());
         jTxtTotal.setText(Util.doubleToStr(quant*varBolsas.getVarPreco()));
     }//GEN-LAST:event_jCboProdutosActionPerformed
+
+    private void jTxtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtQuantidadeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTxtQuantidadeActionPerformed
+
+    private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
+        // TODO add your handling code here:
+        if(jTxtQuantidade.getText().isEmpty()== false){
+        VarBolsas varBolsas = (VarBolsas) jCboProdutos.getSelectedItem();
+        int quant = Util.strToInt(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleToStr(quant * varBolsas.getVarPreco())); 
+        } else {
+        jTxtTotal.setText("");
+        }
+    }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
     /**
      * @param args the command line arguments

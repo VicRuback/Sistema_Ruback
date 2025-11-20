@@ -2,7 +2,7 @@ package bean;
 // Generated 26/09/2025 08:58:21 by Hibernate Tools 4.3.1
 
 
-import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +25,7 @@ public class VarVendasBolsas  implements java.io.Serializable {
      private VarBolsas varBolsas;
      private VarVendas varVendas;
      private Integer varQuantidade;
-     private BigDecimal varValorUnitario;
+     private double varValorUnitario;
 
     public VarVendasBolsas() {
     }
@@ -34,7 +34,7 @@ public class VarVendasBolsas  implements java.io.Serializable {
     public VarVendasBolsas(int varIdVendasBolsas) {
         this.varIdVendasBolsas = varIdVendasBolsas;
     }
-    public VarVendasBolsas(int varIdVendasBolsas, VarBolsas varBolsas, VarVendas varVendas, Integer varQuantidade, BigDecimal varValorUnitario) {
+    public VarVendasBolsas(int varIdVendasBolsas, VarBolsas varBolsas, VarVendas varVendas, Integer varQuantidade, double varValorUnitario) {
        this.varIdVendasBolsas = varIdVendasBolsas;
        this.varBolsas = varBolsas;
        this.varVendas = varVendas;
@@ -86,11 +86,11 @@ public class VarVendasBolsas  implements java.io.Serializable {
 
     
     @Column(name="var_valor_unitario", precision=10)
-    public BigDecimal getVarValorUnitario() {
+    public double getVarValorUnitario() {
         return this.varValorUnitario;
     }
     
-    public void setVarValorUnitario(BigDecimal varValorUnitario) {
+    public void setVarValorUnitario(double varValorUnitario) {
         this.varValorUnitario = varValorUnitario;
     }
 

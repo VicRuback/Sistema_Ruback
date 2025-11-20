@@ -38,15 +38,10 @@ public class Util {
     }
 
     public static boolean perguntar(String cad) {
-         int opcao = JOptionPane.showConfirmDialog(
-            null,
-            cad,
-            "Confirmação",
-            JOptionPane.YES_NO_OPTION,
-            JOptionPane.QUESTION_MESSAGE
-    );
-    return opcao == JOptionPane.YES_OPTION;
+        int resp = JOptionPane.showConfirmDialog(null, cad, "Perguntar", JOptionPane.YES_NO_OPTION);
+        return resp == JOptionPane.YES_OPTION;
 }
+    
      public static int strToInt(String num) {
         return Integer.valueOf(num); 
        
@@ -56,11 +51,11 @@ public class Util {
        
     }
     public static double strToDouble(String num) {
-        return 0; 
+        return Double.valueOf(num);
        
     }
     public static String doubleToStr(double num) {
-        return ""; 
+        return String.valueOf(num) ;
        
     }
     public static Date strDate(String data) {

@@ -2,7 +2,7 @@ package bean;
 // Generated 26/09/2025 08:58:21 by Hibernate Tools 4.3.1
 
 
-import dao.ClientesDAO;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
