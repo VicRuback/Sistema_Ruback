@@ -129,6 +129,19 @@ public class VarVendedores  implements java.io.Serializable {
     public void setVarAtivo(String varAtivo) {
         this.varAtivo = varAtivo;
     }
+    
+    
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof VarVendedores) {
+            if (this.getVarIdVendedor()== ((VarVendedores) object).getVarIdVendedor()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
 

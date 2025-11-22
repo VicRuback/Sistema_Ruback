@@ -221,8 +221,8 @@ public class VarClientes  implements java.io.Serializable {
  @Override
     public boolean equals(Object object) {
         if (object instanceof VarClientes) {
-            VarClientes clientes = (VarClientes) object;
-            if (this.getVarIdCliente()== clientes.getVarIdCliente()) {
+            VarClientes varClientes = (VarClientes) object;
+            if (this.getVarIdCliente()== varClientes.getVarIdCliente()) {
                 return true;
             }
         }

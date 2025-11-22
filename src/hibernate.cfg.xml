@@ -46,7 +46,7 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_victoria_ruback?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">victoria_ruback</property>
     <property name="hibernate.connection.password">victoria_ruback</property>
-<!--      <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3307/mysql?zeroDateTimeBehavior=convertToNull</property>
+<!--      <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3307/?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password"></property>-->
     <mapping class="bean.VarVendedores"/>
