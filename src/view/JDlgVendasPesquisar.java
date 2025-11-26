@@ -7,6 +7,7 @@ package view;
 import bean.VarVendas;
 import dao.VendasDAO;
 import java.util.List;
+import tools.Util;
 
 
 
@@ -121,10 +122,13 @@ public class JDlgVendasPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-         VarVendas varVendas =  controllerVendas.getBean( jTable1.getSelectedRow() );
-        jDlgVendas.beanView(varVendas);
-        this.setVisible(false);
-     
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Cabeçudo selecione uma linha");
+        } else {
+            VarVendas varVendas = controllerVendas.getBean(jTable1.getSelectedRow());
+            jDlgVendas.beanView(varVendas);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBtnOkMouseClicked

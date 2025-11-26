@@ -23,7 +23,7 @@ public class JDlgBolsasPesquisar extends javax.swing.JDialog {
     private JDlgBolsas jDlgBolsas;
     ControllerBolsas controllerBolsas;
     
-     public void setTelaAnterior( JDlgBolsas jDlgBolsas) {;
+     public void setTelaAnterior( JDlgBolsas jDlgBolsas) {
         this.jDlgBolsas = jDlgBolsas;
     }
     

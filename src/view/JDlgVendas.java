@@ -8,9 +8,11 @@ package view;
 import bean.VarClientes;
 import bean.VarUsuarios;
 import bean.VarVendas;
+import bean.VarVendasBolsas;
 import dao.ClientesDAO;
+import dao.UsuariosDAO;
 import dao.VendasDAO;
-import dao.VendedoresDAO;
+import dao.VendasProdutosDAO;
 import java.util.ArrayList;
 import java.util.List;
 import tools.Util;
@@ -39,8 +41,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         for (int i = 0; i < lista.size(); i++) {
             jCboClientes.addItem((VarClientes) lista.get(i));
         }
-        VendedoresDAO vendedoresDAO = new VendedoresDAO();
-        List listaV = (List) vendedoresDAO.listAll();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List listaV = (List) usuariosDAO.listAll();
         for (Object object : listaV) {
             jCboUsuarios.addItem((VarUsuarios) object);
         }
@@ -317,9 +319,9 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?") == true) {
-            int ind = jTable1.getSelectedRow();
-            controllerVendasProdutos.removeBean(ind);
+       if (Util.perguntar("Deseja Excluir?") == true) {
+            int rowindex = jTable1.getSelectedRow();
+            controllerVendasProdutos.removeBean(rowindex);
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -344,24 +346,40 @@ public class JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-                if (Util.perguntar("Deseja Excluir?") == true) {
-                        VendasDAO vendasDAO = new VendasDAO();
-                       vendasDAO.delete(viewBean());
-                    }
-                Util.Limpar(jTxtCodigo, jFmtData, jCboClientes, jCboUsuarios, jTxtTotal);
+                if (Util.perguntar("Deseja realmente excluir o registro?")) {
+            VendasDAO vendasDAO = new VendasDAO();
+            VendasProdutosDAO vendasProdutosDAO = new VendasProdutosDAO();
+            VarVendas varVendas = viewBean();            
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                VarVendasBolsas varVendasBolsas = controllerVendasProdutos.getBean(ind);
+                vendasProdutosDAO.delete(varVendasBolsas);
+            }
+            vendasDAO.delete(varVendas);
+        }
+        Util.Limpar(jTxtCodigo, jTxtTotal, jCboClientes, jCboUsuarios, jFmtData);
+        controllerVendasProdutos.setList(new ArrayList());
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
                VendasDAO vendasDAO = new VendasDAO();
-                if (incluir == true) {
-                        vendasDAO.insert(viewBean());
-                    } else {
-                        vendasDAO.update(viewBean());
-                  }
+        VendasProdutosDAO vendasProdutosDAO = new VendasProdutosDAO();
+        VarVendas varVendas = viewBean();
+        if (incluir == true) {
+            vendasDAO.insert(varVendas);
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                VarVendasBolsas varVendasBolsas = controllerVendasProdutos.getBean(ind);
+                varVendasBolsas.setVarVendas(varVendas);
+                vendasProdutosDAO.insert(varVendasBolsas);
+            }
+        } else {
+            vendasDAO.update(varVendas); 
+
+        }
                 Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboUsuarios, jTxtTotal,
             jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
                 Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+                Util.Limpar(jTxtCodigo, jFmtData, jCboClientes, jCboUsuarios, jTxtTotal);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -388,6 +406,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here:
         JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setTelaAnterior(this);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 

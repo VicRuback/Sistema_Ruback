@@ -194,13 +194,14 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
         // TODO add your handling code here:
-        if(jTxtQuantidade.getText().isEmpty()== false){
-        VarBolsas varBolsas = (VarBolsas) jCboProdutos.getSelectedItem();
-        int quant = Util.strToInt(jTxtQuantidade.getText());
-        jTxtTotal.setText(Util.doubleToStr(quant * varBolsas.getVarPreco())); 
+        if (jTxtQuantidade.getText().isEmpty()) {
+            jTxtTotal.setText("");
         } else {
-        jTxtTotal.setText("");
+            VarBolsas varBolsas = (VarBolsas) jCboProdutos.getSelectedItem();
+            int quant = Util.strToInt(jTxtQuantidade.getText());
+            jTxtTotal.setText(Util.doubleToStr(quant * varBolsas.getVarPreco()));
         }
+
     }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
     /**

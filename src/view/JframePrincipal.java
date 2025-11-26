@@ -38,6 +38,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         jMenuItemClientes = new javax.swing.JMenuItem();
         jMenuItemVendedores = new javax.swing.JMenuItem();
         jMenuItemUsuarios = new javax.swing.JMenuItem();
+        jMenuItemVendas = new javax.swing.JMenuItem();
         jSeparator = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenuMovimentos = new javax.swing.JMenu();
@@ -53,7 +54,7 @@ public class JframePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItemBolsas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemBolsas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemBolsas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produto.png"))); // NOI18N
         jMenuItemBolsas.setText("Bolsas");
         jMenuItemBolsas.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +64,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemBolsas);
 
-        jMenuItemClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
         jMenuItemClientes.setText("Clientes");
         jMenuItemClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +74,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemClientes);
 
-        jMenuItemVendedores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemVendedores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemVendedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vendedores.png"))); // NOI18N
         jMenuItemVendedores.setText("Vendedores");
         jMenuItemVendedores.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +84,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         });
         jMenuCadastros.add(jMenuItemVendedores);
 
-        jMenuItemUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
         jMenuItemUsuarios.setText("Usuário");
         jMenuItemUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -92,9 +93,19 @@ public class JframePrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuItemUsuarios);
+
+        jMenuItemVendas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produto.png"))); // NOI18N
+        jMenuItemVendas.setText("Vendas");
+        jMenuItemVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVendasActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemVendas);
         jMenuCadastros.add(jSeparator);
 
-        jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItemSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit.png"))); // NOI18N
         jMenuItemSair.setText("Sair");
         jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +120,7 @@ public class JframePrincipal extends javax.swing.JFrame {
         jMenuMovimentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vendedores.png"))); // NOI18N
         jMenuMovimentos.setText("Movimentos");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/exit_1.png"))); // NOI18N
         jMenuItem1.setText("Bolsas_Pedidos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +185,12 @@ public class JframePrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenuItemSairActionPerformed
 
+    private void jMenuItemVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendasActionPerformed
+        // TODO add your handling code here:
+        JDlgVendas jdlgVendas = new JDlgVendas(this, true);
+ jdlgVendas.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVendasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,6 +235,7 @@ public class JframePrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemClientes;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemUsuarios;
+    private javax.swing.JMenuItem jMenuItemVendas;
     private javax.swing.JMenuItem jMenuItemVendedores;
     private javax.swing.JMenu jMenuMovimentos;
     private javax.swing.JPopupMenu.Separator jSeparator;
