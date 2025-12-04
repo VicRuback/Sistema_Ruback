@@ -17,6 +17,7 @@ import tools.Util;
  */
 public class JDlgVendasProdutos extends javax.swing.JDialog {
         JDlgVendas jDlgVendas;
+        private boolean incluir;
     /**
      * Creates new form JDlgPedidosProdutos
      */
@@ -34,8 +35,15 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         }
     }
     
-     public void setTelaAnterior(JDlgVendas jDlgVendas){
+     public void setTelaAnterior(JDlgVendas jDlgVendas, VarVendasBolsas varVendasBolsas){
     this.jDlgVendas = jDlgVendas;
+     incluir = true;
+        if(varVendasBolsas != null){
+        incluir = false;
+        jCboProdutos.setSelectedItem(varVendasBolsas.getVarBolsas());
+        jTxtQuantidade.setText(Util.intToStr(varVendasBolsas.getVarQuantidade()));
+        }
+    
     }
 
     /**
@@ -172,6 +180,9 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         varVendasBolsas.setVarValorUnitario(Util.strToDouble(jTxtValorUnitario.getText()));
         jDlgVendas.controllerVendasProdutos.addBean(varVendasBolsas);
         setVisible(false);
+         if (incluir == false){
+            jDlgVendas.controllerVendasProdutos.removeBean(jDlgVendas.getjTable1().getSelectedRow());
+        }
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
