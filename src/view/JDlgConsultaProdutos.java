@@ -29,7 +29,7 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar produtos");
+        setTitle("Consultar produtos");
         controllerConsultasProdutos= new ControllerConsultasProdutos();
        bolsasDAO = new BolsasDAO();
         List lista = (List) bolsasDAO.listAll();

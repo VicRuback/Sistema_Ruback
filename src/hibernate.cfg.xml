@@ -43,12 +43,12 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-<!--    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_victoria_ruback?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_victoria_ruback?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">victoria_ruback</property>
-    <property name="hibernate.connection.password">victoria_ruback</property>-->
-      <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3307/db_victoria_ruback?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.password">victoria_ruback</property>
+<!--      <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3307/db_victoria_ruback?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password"></property>
+    <property name="hibernate.connection.password"></property>-->
     <mapping class="bean.VarVendedores"/>
     <mapping class="bean.VarVendasBolsas"/>
     <mapping class="bean.VarVendas"/>

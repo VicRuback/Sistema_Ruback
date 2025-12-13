@@ -24,7 +24,7 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Consulta Clientes");
+        setTitle("Consultar Clientes");
         controllerConsultasClientes = new ControllerConsultasClientes();
         clientesDAO = new ClientesDAO();
         List lista = (List) clientesDAO.listAll();
