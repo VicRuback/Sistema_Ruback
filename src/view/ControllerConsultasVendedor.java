@@ -47,7 +47,7 @@ public class ControllerConsultasVendedor extends AbstractTableModel {
             return varVendedores.getVarNome();
         }
         if (columnIndex == 2){
-            return varVendedores.getVarCpf();
+            return varVendedores.getVarAtivo();
         
         }
         return "";
@@ -58,7 +58,7 @@ public class ControllerConsultasVendedor extends AbstractTableModel {
     public String getColumnName (int column) {
         if (column == 0) return "Código";
         if (column == 1) return "Nome";
-        if (column == 2) return "Cpf";
+        if (column == 2) return "Ativo";
         return "";
     }
     

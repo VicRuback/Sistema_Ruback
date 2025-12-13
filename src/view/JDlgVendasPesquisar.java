@@ -123,9 +123,9 @@ public class JDlgVendasPesquisar extends javax.swing.JDialog {
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
         if (jTable1.getSelectedRow() == -1) {
-            Util.mensagem("Cabeçudo selecione uma linha");
+            Util.mensagem("selecione uma linha");
         } else {
-            VarVendas varVendas = controllerVendas.getBean(jTable1.getSelectedRow());
+            VarVendas varVendas = (VarVendas) controllerVendas.getBean(jTable1.getSelectedRow());
             jDlgVendas.beanView(varVendas);
             this.setVisible(false);
         }

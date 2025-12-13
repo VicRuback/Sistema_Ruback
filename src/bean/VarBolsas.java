@@ -139,16 +139,17 @@ public class VarBolsas  implements java.io.Serializable {
     public void setVarTipo(String varTipo) {
         this.varTipo = varTipo;
     }
-     @Override
-    public boolean equals(Object object) {
-        if (object instanceof VarBolsas) {
-            if (this.getVarIdBolsas()== ((VarBolsas) object).getVarIdBolsas()) {
+    @Override
+            public boolean equals(Object object){
+        if (object instanceof VarBolsas){
+            VarBolsas bolsas = (VarBolsas)object;
+            if (this.getVarIdBolsas()== bolsas.getVarIdBolsas()){
                 return true;
             }
         }
-
-        return false;
+         return false;
     }
+
 
 
 

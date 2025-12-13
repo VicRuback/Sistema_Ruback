@@ -33,19 +33,21 @@ public class JDlgVendas extends javax.swing.JDialog {
     public JDlgVendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Tela de Vendas");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jFmtData, jCboClientes, jCboUsuarios, jTxtTotal,
                 jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        ClientesDAO clientesDAO = new ClientesDAO();
-        List lista = (List) clientesDAO.listAll();
-        for (int i = 0; i < lista.size(); i++) {
-            jCboClientes.addItem((VarClientes) lista.get(i));
-        }
+        
+          ClientesDAO clientesDAO = new ClientesDAO();
+            List<VarClientes> listaClientes = (List<VarClientes>) clientesDAO.listAll();
+            for (VarClientes cliente : listaClientes) {
+                jCboClientes.addItem(cliente);
+            }
         UsuariosDAO usuariosDAO = new UsuariosDAO();
-        List listaV = (List) usuariosDAO.listAll();
-        for (Object object : listaV) {
-            jCboUsuarios.addItem((VarUsuarios) object);
+        List <VarUsuarios> listaUsuarios = (List <VarUsuarios>) usuariosDAO.listAll();
+        for (VarUsuarios usuarios : listaUsuarios) {
+            jCboUsuarios.addItem(usuarios);
         }
         
          controllerVendasProdutos = new ControllerVendasProdutos();
@@ -375,7 +377,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         if (incluir == true) {
             vendasDAO.insert(varVendas);
             for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
-                VarVendasBolsas varVendasBolsas = controllerVendasProdutos.getBean(ind);
+                VarVendasBolsas varVendasBolsas = (VarVendasBolsas) controllerVendasProdutos.getBean(ind);
                 varVendasBolsas.setVarVendas(varVendas);
                 vendasProdutosDAO.insert(varVendasBolsas);
             }

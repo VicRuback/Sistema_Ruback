@@ -27,7 +27,7 @@ public class JDlgConsultaVendedores extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Usuários");
+        setTitle("Pesquisar Vendedores");
         controllerConsultasVendedor= new ControllerConsultasVendedor();
        vendedoresDAO = new VendedoresDAO();
         List lista = (List) vendedoresDAO.listAll();
@@ -78,7 +78,7 @@ public class JDlgConsultaVendedores extends javax.swing.JDialog {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Valor Maior que ");
+        jLabel2.setText("Ativo");
 
         jBtnConsulta.setText("Conusultar");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -163,19 +163,21 @@ public class JDlgConsultaVendedores extends javax.swing.JDialog {
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-       if (!jTxtNome.getText().isEmpty() && !jTxtValor.getText().isEmpty()) {
-    List lista = (List) vendedoresDAO.listNomeValor(jTxtNome.getText(), Util.strToDouble(jTxtValor.getText()));
+        if (!jTxtNome.getText().isEmpty() && !jTxtValor.getText().isEmpty()) {
+    List lista = (List) vendedoresDAO.listNomeValor(jTxtNome.getText(), jTxtValor.getText());
     controllerConsultasVendedor.setList(lista);
 } else if (!jTxtNome.getText().isEmpty()) {
     List lista = (List) vendedoresDAO.listNome(jTxtNome.getText());
     controllerConsultasVendedor.setList(lista);
 } else if (!jTxtValor.getText().isEmpty()) {
-    List lista = (List) vendedoresDAO.listValor(Util.strToDouble(jTxtValor.getText()));
+    List lista = (List) vendedoresDAO.listValor(jTxtValor.getText());
     controllerConsultasVendedor.setList(lista);
 } else {
     List lista = (List) vendedoresDAO.listAll();
     controllerConsultasVendedor.setList(lista);
 }
+        
+
     }//GEN-LAST:event_jBtnConsultaActionPerformed
 
     private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed
