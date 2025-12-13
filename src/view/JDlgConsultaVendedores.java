@@ -163,22 +163,19 @@ public class JDlgConsultaVendedores extends javax.swing.JDialog {
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-         if ((jTxtNome.getText().isEmpty() == false) && (jTxtValor.getText().isEmpty() == false)){
-        List lista = (List) vendedoresDAO.listNomeValor(jTxtNome.getText(),Util.strToDouble(jTxtValor.getText()));
-        controllerConsultasVendedor.setList(lista);
-        }
-        else if(jTxtNome.getText().isEmpty() == false) {
-        List lista = (List) vendedoresDAO.listNome(jTxtNome.getText());
-        controllerConsultasVendedor.setList(lista);
-        
-        } else if (jTxtValor.getText().isEmpty() == false){
-        List lista = (List) vendedoresDAO.listValor(Util.strToDouble(jTxtValor.getText()));
-        controllerConsultasVendedor.setList(lista);
-        }
-        else {
-        List lista = (List) vendedoresDAO.listAll();
-        controllerConsultasVendedor.setList(lista);
-        }
+       if (!jTxtNome.getText().isEmpty() && !jTxtValor.getText().isEmpty()) {
+    List lista = (List) vendedoresDAO.listNomeValor(jTxtNome.getText(), Util.strToDouble(jTxtValor.getText()));
+    controllerConsultasVendedor.setList(lista);
+} else if (!jTxtNome.getText().isEmpty()) {
+    List lista = (List) vendedoresDAO.listNome(jTxtNome.getText());
+    controllerConsultasVendedor.setList(lista);
+} else if (!jTxtValor.getText().isEmpty()) {
+    List lista = (List) vendedoresDAO.listValor(Util.strToDouble(jTxtValor.getText()));
+    controllerConsultasVendedor.setList(lista);
+} else {
+    List lista = (List) vendedoresDAO.listAll();
+    controllerConsultasVendedor.setList(lista);
+}
     }//GEN-LAST:event_jBtnConsultaActionPerformed
 
     private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed

@@ -51,30 +51,44 @@ public class VendasDAO extends AbstractDAO{
         return lista;     
     }
      public Object listNome(String nome) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarVendas.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
-    public Object listValor(double valorUnitario) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarVendas.class);
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
-     public Object listNomeValor(String nome, double valorUnitario) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarVendas.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
+      
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarVendas.class);
+    criteria.createAlias("varClientes", "c");
+    criteria.add(Restrictions.like("c.varNome", "%" + nome + "%"));
+
+    List<VarVendas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
+
+   public List<VarVendas> listValor(double valorTotal) {
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarVendas.class);
+    criteria.add(Restrictions.ge("varTotal", valorTotal));
+
+    List<VarVendas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
+
+    public List<VarVendas> listNomeValor(String nome, double valorTotal) {
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarVendas.class);
+    criteria.createAlias("varClientes", "c");
+    criteria.add(Restrictions.like("c.varNome", "%" + nome + "%"));
+    criteria.add(Restrictions.ge("varTotal", valorTotal));
+
+    List<VarVendas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
 
     @Override
     public Object listAll() {

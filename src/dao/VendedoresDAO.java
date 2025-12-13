@@ -54,24 +54,24 @@ public class VendedoresDAO extends AbstractDAO{
      public Object listNome(String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VarVendedores.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        criteria.add(Restrictions.like("varNome", "%" + nome + "%"));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-    public Object listValor(double valorUnitario) {
+     public Object listValor(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VarVendedores.class);
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        criteria.add(Restrictions.ge("varIdVendedor", (int) valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
     }
-     public Object listNomeValor(String nome, double valorUnitario) {
+     public Object listNomeValor(String nome, double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VarVendedores.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        criteria.add(Restrictions.like("varNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("varIdVendedor", (int) valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

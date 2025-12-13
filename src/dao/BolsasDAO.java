@@ -53,31 +53,43 @@ public class BolsasDAO extends AbstractDAO{
         
     }
     
-    public Object listNome(String nome) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarBolsas.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
-    public Object listValor(double valorUnitario) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarBolsas.class);
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
-     public Object listNomeValor(String nome, double valorUnitario) {
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(VarBolsas.class);
-        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
-        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
-        List lista = criteria.list();
-        session.getTransaction().commit();
-        return lista;
-    }
+  public List<VarBolsas> listNome(String nome) {
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarBolsas.class);
+    criteria.add(Restrictions.like("varNome", "%" + nome + "%"));
+
+    List<VarBolsas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
+
+   public List<VarBolsas> listValor(double valorUnitario) {
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarBolsas.class);
+    criteria.add(Restrictions.ge("varPreco", valorUnitario));
+
+    List<VarBolsas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
+
+     public List<VarBolsas> listNomeValor(String nome, double valorUnitario) {
+    session.beginTransaction();
+
+    Criteria criteria = session.createCriteria(VarBolsas.class);
+    criteria.add(Restrictions.like("varNome", "%" + nome + "%"));
+    criteria.add(Restrictions.ge("varPreco", valorUnitario));
+
+    List<VarBolsas> lista = criteria.list();
+    session.getTransaction().commit();
+
+    return lista;
+}
+
 
     @Override
     public Object listAll() {

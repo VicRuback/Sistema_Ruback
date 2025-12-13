@@ -163,30 +163,19 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-        if (!jTxtCpf.getText().isEmpty() && !jTxtNome.getText().isEmpty()) {
-            String nome = jTxtNome.getText();
-            String cpf = jTxtCpf.getText();
-            
-            List listNome = (List) clientesDAO.listNome(nome);
-            controllerConsultasClientes.setList(listNome);
-            
-        } else if (!jTxtNome.getText().isEmpty()) {
-            String nome = jTxtNome.getText();
-            
-            List listNome = (List) clientesDAO.listNome(nome);
-            controllerConsultasClientes.setList(listNome);
-            
-        } else if (!jTxtCpf.getText().isEmpty()){
-            String cpf = jTxtCpf.getText();
-            
-            List listCpf = (List) clientesDAO.listCpf(cpf);
-            controllerConsultasClientes.setList(listCpf);
-            
-        } else {
-            
-            List lista = (List) clientesDAO.listAll();
-            controllerConsultasClientes.setList(lista);
-        }
+       if (!jTxtNome.getText().isEmpty() && !jTxtCpf.getText().isEmpty()) {
+    List lista = (List) clientesDAO.listNomeCpf(jTxtNome.getText(), jTxtCpf.getText());
+    controllerConsultasClientes.setList(lista);
+} else if (!jTxtNome.getText().isEmpty()) {
+    List lista = (List) clientesDAO.listNome(jTxtNome.getText());
+    controllerConsultasClientes.setList(lista);
+} else if (!jTxtCpf.getText().isEmpty()) {
+    List lista = (List) clientesDAO.listCpf(jTxtCpf.getText());
+    controllerConsultasClientes.setList(lista);
+} else {
+    List lista = (List) clientesDAO.listAll();
+    controllerConsultasClientes.setList(lista);
+}
         
     }//GEN-LAST:event_jBtnConsultaActionPerformed
 
