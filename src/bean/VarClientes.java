@@ -217,6 +217,9 @@ public class VarClientes  implements java.io.Serializable {
         this.varEstadocivil = varEstadocivil;
     }
 
+    public String toString(){
+    return this.getVarNome();
+    }
 
  @Override
     public boolean equals(Object object) {

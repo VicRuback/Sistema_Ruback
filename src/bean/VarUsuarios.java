@@ -129,7 +129,9 @@ public class VarUsuarios  implements java.io.Serializable {
         this.varAtivo = varAtivo;
     }
 
-
+  public String toString(){
+    return this.getVarNome();
+    }
 
 
 
