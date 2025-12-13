@@ -59,7 +59,31 @@ public class VendasProdutosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
-    
+     public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarVendasBolsas.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public Object listValor(double valorUnitario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarVendasBolsas.class);
+        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public Object listNomeValor(String nome, double valorUnitario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarVendasBolsas.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
     
     public Object listProdutos(VarVendas varVendas) {
         session.beginTransaction();

@@ -4,7 +4,11 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -59,9 +63,19 @@ public class Util {
        
     }
     public static Date strDate(String data) {
+       SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+        try {
+            return fm.parse(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return null;
     }
      public static String dateToStr(Date data) {
-        return "";
+         SimpleDateFormat fm = new SimpleDateFormat("dd/MM/YYYY");
+        return fm.format(data);
+        
+    
     }
 }

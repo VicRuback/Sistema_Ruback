@@ -63,7 +63,8 @@ public class JDlgVendas extends javax.swing.JDialog {
         varVendas.setVarIdVendas(Util.strToInt(jTxtCodigo.getText()));
         varVendas.setVarClientes((VarClientes) jCboClientes.getSelectedItem() );
         varVendas.setVarUsuarios((VarUsuarios) jCboUsuarios.getSelectedItem());
-        //data
+        varVendas.setVarDataVendas(Util.strDate(jFmtData.getText()));
+
         varVendas.setVarTotal(Util.strToDouble(jTxtTotal.getText()));
         return varVendas;
     }

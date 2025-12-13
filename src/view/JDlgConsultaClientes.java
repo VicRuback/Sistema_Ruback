@@ -4,40 +4,33 @@
  */
 package view;
 
-import bean.VarUsuarios;
-import dao.VendasDAO;
-import dao.BolsasDAO;
-import dao.UsuariosDAO;
+import dao.ClientesDAO;
 import java.util.List;
 import tools.Util;
-import view.JDlgUsuario;
 
 /**
  *
  * @author Marcos
  */
-public class JDlgConsultaProdutos extends javax.swing.JDialog {
+public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
+    ControllerConsultasClientes controllerConsultasClientes;
+    ClientesDAO clientesDAO;
 
-    ControllerConsultasProdutos controllerConsultasProdutos;
-    BolsasDAO bolsasDAO;
-
-    public JDlgConsultaProdutos(java.awt.Frame parent, boolean modal) {
+    public JDlgConsultaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Usuários");
-        controllerConsultasProdutos= new ControllerConsultasProdutos();
-       bolsasDAO = new BolsasDAO();
-        List lista = (List) bolsasDAO.listAll();
-        controllerConsultasProdutos.setList(lista);
-        jTable1.setModel(controllerConsultasProdutos);
+        setTitle("Consulta Clientes");
+        controllerConsultasClientes = new ControllerConsultasClientes();
+        clientesDAO = new ClientesDAO();
+        List lista = (List) clientesDAO.listAll();
+        controllerConsultasClientes.setList(lista);
+        jTable1.setModel(controllerConsultasClientes);
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,12 +43,12 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jBtnOk = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTxtNome = new javax.swing.JTextField();
-        jTxtValor = new javax.swing.JTextField();
+        jTxtCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsulta = new javax.swing.JButton();
-        jBtnOk1 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -78,21 +71,21 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel1.setText("Nome");
-
-        jLabel2.setText("Valor Maior que ");
-
-        jBtnConsulta.setText("Conusultar");
-        jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
+        jBtnOk.setText("Fechar");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnConsultaActionPerformed(evt);
+                jBtnOkActionPerformed(evt);
             }
         });
 
-        jBtnOk1.setText("Fechar");
-        jBtnOk1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setText("Nome");
+
+        jLabel2.setText("cpf");
+
+        jBtnConsulta.setText("Consultar");
+        jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOk1ActionPerformed(evt);
+                jBtnConsultaActionPerformed(evt);
             }
         });
 
@@ -110,14 +103,12 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnOk1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBtnOk))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -126,10 +117,10 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBtnConsulta)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -145,87 +136,102 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTxtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtnConsulta))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jBtnOk1))
+                    .addComponent(jBtnOk)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jBtnOkActionPerformed
+
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-    
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            jBtnOkActionPerformed(null);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
         // TODO add your handling code here:
-         if ((jTxtNome.getText().isEmpty() == false) && (jTxtValor.getText().isEmpty() == false)){
-        List lista = (List) bolsasDAO.listNomeValor(jTxtNome.getText(),Util.strToDouble(jTxtValor.getText()));
-        controllerConsultasProdutos.setList(lista);
+        if (!jTxtCpf.getText().isEmpty() && !jTxtNome.getText().isEmpty()) {
+            String nome = jTxtNome.getText();
+            String cpf = jTxtCpf.getText();
+            
+            List listNome = (List) clientesDAO.listNome(nome);
+            controllerConsultasClientes.setList(listNome);
+            
+        } else if (!jTxtNome.getText().isEmpty()) {
+            String nome = jTxtNome.getText();
+            
+            List listNome = (List) clientesDAO.listNome(nome);
+            controllerConsultasClientes.setList(listNome);
+            
+        } else if (!jTxtCpf.getText().isEmpty()){
+            String cpf = jTxtCpf.getText();
+            
+            List listCpf = (List) clientesDAO.listCpf(cpf);
+            controllerConsultasClientes.setList(listCpf);
+            
+        } else {
+            
+            List lista = (List) clientesDAO.listAll();
+            controllerConsultasClientes.setList(lista);
         }
-        else if(jTxtNome.getText().isEmpty() == false) {
-        List lista = (List) bolsasDAO.listNome(jTxtNome.getText());
-        controllerConsultasProdutos.setList(lista);
         
-        } else if (jTxtValor.getText().isEmpty() == false){
-        List lista = (List) bolsasDAO.listValor(Util.strToDouble(jTxtValor.getText()));
-        controllerConsultasProdutos.setList(lista);
-        }
-        else {
-        List lista = (List) bolsasDAO.listAll();
-        controllerConsultasProdutos.setList(lista);
-        }
     }//GEN-LAST:event_jBtnConsultaActionPerformed
-
-    private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_jBtnOk1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (java.awt.print.PrinterJob.lookupPrintServices().length == 0) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Nenhuma impressora disponível no sistema.\n" +
-                "Não há impressora PDF configurada para gerar o arquivo.");
-            return;
-        }
-        try {
-            javax.swing.JTable table = jTable1;
+    if (java.awt.print.PrinterJob.lookupPrintServices().length == 0) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Nenhuma impressora disponível no sistema.\n" +
+            "Não há impressora PDF configurada para gerar o arquivo.");
+        return;
+    }
+    try {
+        javax.swing.JTable table = jTable1;
 
-            java.awt.print.PrinterJob job = java.awt.print.PrinterJob.getPrinterJob();
-            job.setJobName("RelatorioClientes");
+        java.awt.print.PrinterJob job = java.awt.print.PrinterJob.getPrinterJob();
+        job.setJobName("RelatorioClientes");
 
-            job.setPrintable(new java.awt.print.Printable() {
-                public int print(java.awt.Graphics g, java.awt.print.PageFormat pf, int pageIndex) {
+        job.setPrintable(new java.awt.print.Printable() {
+            public int print(java.awt.Graphics g, java.awt.print.PageFormat pf, int pageIndex) {
 
-                    if (pageIndex > 0) {
-                        return java.awt.print.Printable.NO_SUCH_PAGE;
-                    }
-
-                    java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
-                    g2.translate(pf.getImageableX(), pf.getImageableY());
-                    g2.scale(0.85, 0.85);
-
-                    table.print(g2);
-
-                    return java.awt.print.Printable.PAGE_EXISTS;
+                if (pageIndex > 0) {
+                    return java.awt.print.Printable.NO_SUCH_PAGE;
                 }
-            });
 
-            if (job.printDialog()) {
-                job.print();
+                java.awt.Graphics2D g2 = (java.awt.Graphics2D) g;
+                g2.translate(pf.getImageableX(), pf.getImageableY());
+                g2.scale(0.85, 0.85); 
+
+                table.print(g2);
+
+                return java.awt.print.Printable.PAGE_EXISTS;
             }
+        });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            javax.swing.JOptionPane.showMessageDialog(null, "Erro ao imprimir: " + e.getMessage());
+        if (job.printDialog()) {
+            job.print(); 
         }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(null, "Erro ao imprimir: " + e.getMessage());
+    }
+
+
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -246,14 +252,38 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgConsultaClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -266,7 +296,7 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgConsultaProdutos dialog = new JDlgConsultaProdutos(new javax.swing.JFrame(), true);
+                JDlgConsultaClientes dialog = new JDlgConsultaClientes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -280,13 +310,13 @@ public class JDlgConsultaProdutos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsulta;
-    private javax.swing.JButton jBtnOk1;
+    private javax.swing.JButton jBtnOk;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTxtCpf;
     private javax.swing.JTextField jTxtNome;
-    private javax.swing.JTextField jTxtValor;
     // End of variables declaration//GEN-END:variables
 }

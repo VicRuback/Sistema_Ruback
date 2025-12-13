@@ -48,9 +48,32 @@ public class UsuariosDAO extends AbstractDAO{
         criteria.add(Restrictions.eq("varIdUsuarios", codigo));
         List lista = criteria.list();
         session.getTransaction(). commit();
+        return lista;    
+    }
+     public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarUsuarios.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
         return lista;
-
-        
+    }
+    public Object listValor(double valorUnitario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarUsuarios.class);
+        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public Object listNomeValor(String nome, double valorUnitario) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VarUsuarios.class);
+        criteria.add(Restrictions.like("nome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("valorUnitario", valorUnitario));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
 
     @Override
